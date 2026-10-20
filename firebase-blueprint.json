@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "User profile with role, green credits, and tree fund stats",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Auth UID" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["vendor", "ngo", "collector", "planner"] },
+        "walletBalance": { "type": "number" },
+        "lifetimeEarned": { "type": "number" },
+        "treesPlantedCount": { "type": "number" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email", "role"]
+    },
+    "FoodListing": {
+      "title": "Surplus Food Listing",
+      "description": "Unsold safe food posted by vendors",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "itemName": { "type": "string", "maxLength": 150 },
+        "category": { "type": "string" },
+        "vendorName": { "type": "string" },
+        "vendorLocation": { "type": "string" },
+        "portions": { "type": "number" },
+        "status": { "type": "string" },
+        "expiresAt": { "type": "number" },
+        "createdBy": { "type": "string" }
+      },
+      "required": ["itemName", "portions", "status", "expiresAt", "createdBy"]
+    },
+    "DrainReport": {
+      "title": "Drain Bounty Submission",
+      "description": "Community drain clearing proof and verification",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "hotspotId": { "type": "string" },
+        "collectorName": { "type": "string" },
+        "gpsCoordinates": { "type": "string" },
+        "clearedBags": { "type": "number" },
+        "status": { "type": "string" },
+        "submittedBy": { "type": "string" }
+      },
+      "required": ["hotspotId", "collectorName", "status", "submittedBy"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile and civic wallet record"
+    },
+    "/food_listings/{listingId}": {
+      "schema": "FoodListing",
+      "description": "Active and historical surplus food rescue listings"
+    },
+    "/drain_reports/{reportId}": {
+      "schema": "DrainReport",
+      "description": "Drain bounty clearing proof reports"
+    }
+  }
+}

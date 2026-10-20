@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch;
+          var descriptor = {
+            configurable: true,
+            enumerable: true,
+            get: function() {
+              return _fetch;
+            },
+            set: function(val) {
+              _fetch = val;
+            }
+          };
+          Object.defineProperty(window, 'fetch', descriptor);
+          if (typeof Window !== 'undefined' && Window.prototype) {
+            try {
+              Object.defineProperty(Window.prototype, 'fetch', descriptor);
+            } catch (e) {}
+          }
+        } catch (err) {}
+      })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>UrbanLoop - Circular Civic Ecology</title>
+    <meta name="description" content="Connecting surplus food rescue (Surplus2Serve), drain clearing & recycling passports (Drain2Value 2.0), and micro-contributed urban afforestation (Urban Canopy)." />
+    <meta property="og:title" content="UrbanLoop - Circular Civic Ecology & Flood Resilience" />
+    <meta property="og:description" content="Connecting surplus food rescue (Surplus2Serve), drain clearing & recycling passports (Drain2Value 2.0), and micro-contributed urban afforestation (Urban Canopy)." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  </head>
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-100 selection:text-emerald-900">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
